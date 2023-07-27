@@ -30,7 +30,141 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/icon/appleicon.png"> 
   </head>
   <body>
+  	<center>
+	<table>
+		<tr>
+			<td id="t_h">00</td>
+			<td class="dotdot">:</td>
+			<td id="t_m">00</td>
+			<td class="dotdot">:</td>
+			<td id="t_s">00</td>
+		</tr>
+		<tr class="todayis">
+			<td id="t_year">00</td>
+			<td class="dash">&middot;</td>
+			<td id="t_mon">00</td>
+			<td class="dash">&middot;</td>
+			<td id="t_day">00</td>
+		</tr>
+		<tr class="tz">
+			<td colspan="5" id="t_tz">tz</td>
+		</tr>
+	</table>
+	</center>
 
+	<style>
+
+		body {
+			margin-top: 120px;
+			color: #333666;
+			font-size: 80pt;
+			background-color: #333666;
+			text-align: center;
+			font-family: monospace;
+			font-weight: 900;
+		}
+
+		table {
+			align: center;
+		}
+
+		table td {
+			text-align: center;
+			vertical-align: text-bottom;
+		}
+
+		.dotdot {
+			font-family: serif;
+		}
+
+		.todayis td {
+			font-size: 24pt;
+		}
+
+		.tz td {
+			padding: 20px;
+			font-size: 12pt;
+		}
+
+	</style>
+
+	<script>
+
+	function tick() {
+		document.querySelectorAll('.dotdot').forEach(function(a){
+			a.style.color = '#ffffff';
+	  });
+	//  console.log('tick!');
+	}
+
+	function tock() {
+		document.querySelectorAll('.dotdot').forEach(function(a){
+			a.style.color = '#333666';
+	  });
+	//  console.log('tock!');
+	}
+
+	function upd(id, s) {
+		document.querySelector(id).innerText = '' + s;
+	}
+
+	function pad(n) {
+		return (('' + n).length < 2) ? ('0'+ n) : ''+n;
+	}
+
+	function month(n) {
+		const months = [
+			'Jan', 'Feb', 'Mar',
+			'Apr', 'May', 'Jun',
+			'Jul', 'Aug', 'Sep',
+			'Oct', 'Nov', 'Dec',
+			];
+		return months[n];
+	}
+
+	function gotime() {
+		ticktock();
+		document.body.style.color = '#ffffff';
+		setInterval(ticktock, 1000);
+	}
+
+	function ticktock(){
+
+		const dt = new Date();
+
+		const h = dt.getHours();
+		const m = dt.getMinutes();
+		const s = dt.getSeconds();
+
+		const year = dt.getFullYear();
+		const mon = dt.getMonth();
+		const day = dt.getDate();
+
+		const dts = '' + dt;
+		const tz = dts.match(/\((.*)\)/)[1];
+		const offset = dts.match(/GMT(\+|-)\d{4}/)[0]
+			.replace(/gmt/i,'UTC');
+
+		upd('#t_h', pad(h));
+		upd('#t_m', pad(m));
+		upd('#t_s', pad(s));
+
+		upd('#t_year', pad(year));
+		upd('#t_mon', month(mon));
+		upd('#t_day', pad(day));
+
+		upd('#t_tz', `(${offset}) ${tz}` );
+
+		if( s % 2 ) {
+			tick();
+		} else {
+			tock();
+		}
+	}
+
+	window.onload = gotime;
+
+	</script>
 
   </body>
 </html>
