@@ -1,2 +1,0 @@
-# time
-Dofufa Time service
