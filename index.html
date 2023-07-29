@@ -149,11 +149,13 @@
 		const m = dt.getMinutes();
 		const s = dt.getSeconds();
 
-		const year = dt.getFullYear();
+
 		const mon = dt.getMonth();
 		const day = dt.getDate();
 
 		const dts = '' + dt;
+    const year = dts.substring(0,3);
+    
 		const tz = dts.match(/\((.*)\)/)[1];
 		const offset = dts.match(/GMT(\+|-)\d{4}/)[0]
 			.replace(/gmt/i,'UTC');
