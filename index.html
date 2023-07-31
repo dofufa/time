@@ -40,11 +40,7 @@
 			<td id="t_s">00</td>
 		</tr>
 		<tr class="todayis">
-			<td id="t_year">00</td>
-			<td class="dash">&middot;</td>
-			<td id="t_mon">00</td>
-			<td class="dash">&middot;</td>
-			<td id="t_day">00</td>
+			<td id="t_dateline" colspan="5">--</td>
 		</tr>
 		<tr class="tz">
 			<td colspan="5" id="t_tz">tz</td>
@@ -186,9 +182,9 @@
 		upd('#t_m', pad(m));
 		upd('#t_s', pad(s));
 
-		upd('#t_year', pad(wday));
-		upd('#t_mon', month(mon));
-		upd('#t_day', pad(day));
+    const dateline = `${wday}, ${mon} ${day}`;
+		upd('#t_dateline', pad(dateline));
+
 
 		upd('#t_tz', `(${offset}) ${tz}` );
 
