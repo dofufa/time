@@ -139,13 +139,23 @@
 
 	function month(n) {
 		const months = [
-			'Jan', 'Feb', 'Mar',
-			'Apr', 'May', 'Jun',
-			'Jul', 'Aug', 'Sep',
-			'Oct', 'Nov', 'Dec',
+			'January', 'February', 'March',
+			'April', 'May', 'June',
+			'July', 'August', 'September',
+			'October', 'November', 'December',
 			];
 		return months[n];
 	}
+
+	function weekday(n) {
+		const weekdays = [
+			'Monday', 'Tuesday', 'Wednesday',
+			'Thursday', 'Friday', 'Saturday',
+      'Sunday'
+			];
+		return weekdays[n];
+	}    
+    
 
 	function gotime() {
 		ticktock();
@@ -163,10 +173,10 @@
 
 
 		const mon = dt.getMonth();
-		const day = dt.getDate();
+		const day = dt.getDate(); // month date
 
 		const dts = '' + dt;
-    const year = dts.substring(0,3);
+    const wday = weekday(dt.getDay()); // weekday
     
 		const tz = dts.match(/\((.*)\)/)[1];
 		const offset = dts.match(/GMT(\+|-)\d{4}/)[0]
@@ -176,7 +186,7 @@
 		upd('#t_m', pad(m));
 		upd('#t_s', pad(s));
 
-		upd('#t_year', pad(year));
+		upd('#t_year', pad(wday));
 		upd('#t_mon', month(mon));
 		upd('#t_day', pad(day));
 
