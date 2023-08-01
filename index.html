@@ -31,7 +31,7 @@
   </head>
   <body>
   	<center>
-	<table>
+	<table class="unselectable">
 		<tr>
 			<td id="t_h">00</td>
 			<td class="dotdot">:</td>
@@ -101,6 +101,19 @@
       font-size: 8pt;
       font-family: monospace;
     }
+
+    /*
+    Solution found here:
+    https://stackoverflow.com/a/2310809  
+    */
+    .unselectable {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }     
     
     @media only screen and (orientation: landscape) and (max-device-width: 880px) {
       body {
